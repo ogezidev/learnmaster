@@ -1,0 +1,50 @@
+.section-three {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  background: linear-gradient(to bottom, #ffffff 0%, #1d7cff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+}
+
+.section-three-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  text-align: center;
+}
+
+.section-three-img {
+  max-width: 900px;
+  width: 100%;
+  height: auto;
+}
+
+.section-three-button {
+  padding: 14px 28px;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #237AC6;
+  font-size: 25px;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  text-align: center;
+  padding-right: 20px;
+  padding-top: 15px;
+  font-weight: 500;
+}
+
+.section-three-button:hover {
+  background: #e6f0ff;
+}

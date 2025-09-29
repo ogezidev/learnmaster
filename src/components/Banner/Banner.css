@@ -1,0 +1,100 @@
+.banner {
+  display: flex;
+  flex-wrap: wrap; /* permite quebra no mobile */
+  align-items: center;
+  justify-content: space-between;
+  background: #1d7cff;
+  color: #fff;
+  margin-top: 100px;
+  min-height: 500px;
+  box-sizing: border-box;
+  max-width: 1250px;
+  width: 100%;
+  margin-inline: auto; /* centraliza */
+  padding: 0px 30px; /* respiro nas laterais */
+}
+
+.banner-content {
+  flex-direction: column;
+  max-width: 520px; /* controla largura para alinhar igual ao Figma */
+  padding-left: 15px;
+
+}
+
+.banner-subtitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: white;
+  font-family: Inter, sans-serif ;
+}
+
+.banner-title {
+  font-size: 50px;
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 18px;
+  font-family: Inter, sans-serif;
+}
+
+.banner-image {
+  max-width: 100%; /* 🔥 nunca ultrapassa container */
+  height: auto;
+  border-radius: 10px;
+}
+
+.banner-description {
+  font-size: 1.3rem;
+  font-weight: 500;
+  line-height: 1.6;
+  font-family: Inter, sans-serif;
+
+}
+
+h4 {
+  margin: 5px;
+  margin-bottom: -20px;
+
+}
+
+h3{
+  margin: auto;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+.banner-button {
+  background: #fff;
+  color: #1d7cff;
+  border: none;
+  border-radius: 13px;
+  font-size: 1.1rem;
+  font-weight: 300;
+  cursor: pointer;
+  padding: 12px 24px;
+  width: 290px;
+  max-width: 300px;
+  transition: background 0.2s, color 0.2s;
+  margin-top: 20px;
+  
+}
+
+.banner-button:hover {
+  background: #e6f0ff;
+}
+
+.banner-image-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  min-width: 280px;
+}
+
+.banner-image {
+  width: 570px;
+  margin-left: 20px;
+  margin-top:20px;
+  height: auto;
+}
+
+

@@ -1,0 +1,106 @@
+.banner-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+.banner-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 32px;
+}
+#cardbannerfaculdade {
+  margin-top: 100px;
+}
+
+/* Responsividade (mobile): sempre texto em cima, imagem embaixo */
+.banner-img {
+  flex: 1;
+  min-width: 260px;
+  max-width: 550px;
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+
+.banner-text {
+  flex: 1;
+  min-width: 260px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.banner-category {
+  font-size: 20px;
+  color: #1d7cff;
+  font-weight: 450;
+  font-family: Inter, sans-serif;
+}
+
+p {
+  margin: auto;
+}
+.banner-subtitle2 {
+  font-size: 30px;
+  font-weight: 400;
+  color: #000000;
+  line-height: 1.4;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+  
+}
+#faculdade-subtitle{
+margin-left: 3px;
+max-width: 550px;
+}
+#crianca-texto{
+  padding-left: 40px;
+  padding-bottom: 120px;
+}
+.banner-title2 {
+  max-width: 700px;
+  color: #2a222b;
+  font-size: 55px;
+  line-height: 1.2;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+#cartao-title { 
+  margin-left: 0px;
+}
+#cartao-texto{
+  margin-bottom: 100px;
+}
+
+#faculdade-texto {
+  max-width: 550px;
+  margin-bottom: 50px;
+}
+.no-wrap {
+  white-space: nowrap;
+}
+
+
+/* Responsividade para mobile */
+@media (max-width: 768px) {
+  .banner {
+    flex-direction: column;
+    min-height: 300px;
+    padding: 24px 8px;
+    text-align: center;
+  }
+  .banner-title {
+    font-size: 2rem;
+  }
+}
