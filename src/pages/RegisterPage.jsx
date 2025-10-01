@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const API_URL = 'http://[2804:7f0:3df:23e5:ac03:ea4a:8ccc:ce52]:8080/api/v1/usuario'; 
+  const API_URL = 'Db_learnmaster.mssql.somee.com'; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
