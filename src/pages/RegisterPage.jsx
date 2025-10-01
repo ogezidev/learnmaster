@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import InputField from "./InputField/InputField"; 
-import Checkbox from './Checkbox';
-import PasswordField from './PasswordField'; // Import the new PasswordField component
-import './RegisterPage.css'; // Estilos para a página
+import InputField from '../components/InputField/InputField'; 
+import Checkbox from '../components/InputField/CheckBox';
+import PasswordField from '../components/InputField/PasswordField'; 
+import './RegisterPage.css'; 
 
 const RegisterPage = () => {
   const [name, setName] = useState('');
@@ -14,7 +14,7 @@ const RegisterPage = () => {
   const [errorMessage, setErrorMessage] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
 
-  const API_URL = 'YOUR_API_ENDPOINT_HERE'; // *** Substitua pelo seu endpoint da API ***
+  const API_URL = 'http://[2804:7f0:3df:23e5:ac03:ea4a:8ccc:ce52]:8080/api/v1/usuario'; 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -35,8 +35,7 @@ const RegisterPage = () => {
       });
       console.log('Cadastro realizado com sucesso:', response.data);
       setSuccessMessage('Conta criada com sucesso! Redirecionando...');
-      // Você pode adicionar um redirecionamento aqui, por exemplo:
-      // setTimeout(() => window.location.href = '/dashboard', 2000);
+    
     } catch (error) {
       console.error('Erro ao cadastrar:', error);
       if (error.response && error.response.data && error.response.data.message) {
@@ -61,7 +60,7 @@ const RegisterPage = () => {
         </div>
         <div className="register-form-wrapper">
           <div className="logo-placeholder">
-            {/* Aqui você pode adicionar sua logo, se for uma imagem */}
+          
             <p className="learn-master-brand">Learn Master</p>
             <p className="learn-master-slogan">Memorize com a melhor plataforma educacional</p>
             <p className="learn-master-slogan">Seja LearnMaster.</p>

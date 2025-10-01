@@ -1,5 +1,6 @@
+// src/components/InputField.jsx
 import React, { useState } from 'react';
-import './InputField.css'; // Estilos para o InputField
+import './InputField.css';
 
 const InputField = ({ label, type, value, onChange, id }) => {
   const [isFocused, setIsFocused] = useState(false);
@@ -19,7 +20,7 @@ const InputField = ({ label, type, value, onChange, id }) => {
         required
       />
       <label htmlFor={id}>{label}</label>
-      <div className="input-border"></div> {/* Linha para o corte do label */}
+      <div className="input-border"></div>
     </div>
   );
 };
