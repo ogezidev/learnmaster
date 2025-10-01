@@ -1,0 +1,20 @@
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #000080; /* Cor do checkbox quando marcado */
+  cursor: pointer;
+}
+
+.checkbox-group label {
+  font-size: 0.95em;
+  color: #555;
+  cursor: pointer;
+}

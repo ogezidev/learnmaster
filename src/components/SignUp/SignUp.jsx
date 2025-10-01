@@ -1,6 +1,7 @@
 import React from 'react';
+// 1. Importe o 'Link' do react-router-dom
+import { Link } from 'react-router-dom'; 
 import './SignUp.css';
-// Importe os ícones que vamos usar. Instale com: npm install react-icons
 import { FcGoogle } from 'react-icons/fc';
 import { FaMicrosoft } from 'react-icons/fa';
 
@@ -35,10 +36,15 @@ const SignUp = () => {
           <div className="separator">
             <span>OU</span>
           </div>
-
-          <button className="email-button">
+          
+          {/* 2. Substitua o <button> por um <Link>.
+            - O 'to="/register"' aponta para a rota da página que criei.
+            - Mantive a mesma className "email-button" para que o visual não mude.
+          */}
+          <Link to="/register" className="email-button">
             Entre com um email
-          </button>
+          </Link>
+
         </div>
       </div>
     </div>

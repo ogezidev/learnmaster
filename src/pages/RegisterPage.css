@@ -1,0 +1,117 @@
+.register-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif; /* Ajuste a fonte se necessário */
+}
+
+.register-left {
+  flex: 1;
+  background-color: #000080; /* Azul escuro */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.register-left h1 {
+  font-size: 3em;
+  line-height: 1.2;
+}
+
+.register-right {
+  flex: 1;
+  background-color: #f0f2f5; /* Cor de fundo clara para o lado direito */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding: 20px;
+}
+
+.login-prompt {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.9em;
+  color: #555;
+}
+
+.login-prompt a {
+  text-decoration: none;
+  color: #000080;
+  font-weight: bold;
+}
+
+.register-form-wrapper {
+  background-color: white;
+  padding: 40px 60px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 450px; /* Largura máxima do formulário */
+  text-align: center;
+}
+
+.logo-placeholder {
+  margin-bottom: 30px;
+}
+
+.learn-master-brand {
+  font-size: 2.2em;
+  font-weight: bold;
+  color: #000080;
+  margin-bottom: 5px;
+}
+
+.learn-master-slogan {
+  font-size: 0.9em;
+  color: #666;
+  margin-top: 0;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 25px; /* Espaçamento entre os campos */
+}
+
+.register-form button {
+  background-color: #000080;
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 20px;
+}
+
+.register-form button:hover:not(:disabled) {
+  background-color: #000060;
+}
+
+.register-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9em;
+  margin-top: -15px;
+  margin-bottom: 10px;
+}
+
+.success-message {
+  color: green;
+  font-size: 0.9em;
+  margin-top: -15px;
+  margin-bottom: 10px;
+}

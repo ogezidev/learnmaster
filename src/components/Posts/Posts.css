@@ -1,0 +1,33 @@
+.posts-container {
+  width: 80%;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.posts-title {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.posts-list {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
+}
+
+.post-item {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.post-item:hover {
+  background-color: #f0f0f0;
+}

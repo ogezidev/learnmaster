@@ -1,0 +1,27 @@
+import React, { useState } from 'react';
+import './InputField.css'; // Estilos para o InputField
+
+const InputField = ({ label, type, value, onChange, id }) => {
+  const [isFocused, setIsFocused] = useState(false);
+
+  const handleFocus = () => setIsFocused(true);
+  const handleBlur = () => setIsFocused(false);
+
+  return (
+    <div className={`input-group ${isFocused || value ? 'active' : ''}`}>
+      <input
+        type={type}
+        id={id}
+        value={value}
+        onChange={onChange}
+        onFocus={handleFocus}
+        onBlur={handleBlur}
+        required
+      />
+      <label htmlFor={id}>{label}</label>
+      <div className="input-border"></div> {/* Linha para o corte do label */}
+    </div>
+  );
+};
+
+export default InputField;

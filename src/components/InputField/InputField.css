@@ -1,0 +1,59 @@
+.input-group {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 15px 10px 10px 10px; /* Ajuste o padding para o label flutuar */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1em;
+  outline: none;
+  transition: border-color 0.3s ease;
+  background-color: transparent; /* Importante para a linha do corte */
+}
+
+.input-group input:focus {
+  border-color: #000080;
+}
+
+.input-group label {
+  position: absolute;
+  left: 10px;
+  top: 15px; /* Posição inicial do label */
+  color: #888;
+  font-size: 1em;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  background-color: white; /* Cor de fundo para o "corte" */
+  padding: 0 5px; /* Espaçamento para o corte */
+  z-index: 1; /* Para o label ficar acima da linha */
+}
+
+/* Animação do label */
+.input-group.active label {
+  top: -10px; /* Move para cima */
+  font-size: 0.8em; /* Diminui a fonte */
+  color: #000080;
+  left: 8px; /* Ajuste para centralizar no corte */
+  transform: translateY(0); /* Garante que a transição ocorra */
+}
+
+/* Linha do input, para o "corte" */
+.input-group .input-border {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background-color: #ccc;
+  z-index: 0; /* Fica abaixo do label */
+}
+
+.input-group input:focus + label {
+  top: -10px;
+  font-size: 0.8em;
+  color: #000080;
+  left: 8px;
+}
