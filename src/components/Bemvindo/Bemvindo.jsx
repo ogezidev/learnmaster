@@ -1,8 +1,8 @@
 // src/components/Bemvindo/Bemvindo.jsx (CORRIGIDO)
 import './Bemvindo.css'
 
-// 1. Remova o 'export' da função
-function Bemvindo() { 
+// 1. Altere a linha para usar um export nomeado (Named Export)
+export function Bemvindo() { 
   return (
     <div className="bemvindo-container">
       <h1 className="bemvindo-title">Bem-vindo ao LearnMaster!</h1>
@@ -14,5 +14,4 @@ function Bemvindo() {
   );
 }
 
-// 2. Use 'export default' apenas no final
-export default Bemvindo;
+// 2. REMOVA a linha 'export default Bemvindo;' se existir

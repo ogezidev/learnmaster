@@ -1,11 +1,13 @@
 // src/pages/Cadastro.jsx (CORRIGIDO)
-// Importe a exportação padrão dando o nome que quiser (no caso, Bemvindo)
-import Bemvindo from "../components/Bemvindo/Bemvindo";
+// 1. Use Named Import (com chaves) para corresponder à nova exportação
+import SignUp from '../components/SignUp/SignUp';
+
+
 
 function Cadastro() {
   return (
     <>
-      <Bemvindo />
+      <SignUp />
     </>
   );
 }
