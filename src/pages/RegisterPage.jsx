@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import LoadingLink from '../components/LoadingLink/LoadingLink';
 import InputField from '../components/InputField/InputField';
 import Checkbox from '../components/InputField/CheckBox';
 import PasswordField from '../components/InputField/PasswordField';
@@ -60,7 +60,7 @@ const RegisterPage = () => {
       <div className="register-right">
         <div className="login-prompt">
           <p className="login-text">Você já tem uma conta?</p>
-          <Link to="/login" className="login-button">Entre</Link>
+          <LoadingLink to="/login" className="login-button">Entre</LoadingLink>
         </div>
         <div className="register-form-wrapper">
           <div className="logo-placeholder">

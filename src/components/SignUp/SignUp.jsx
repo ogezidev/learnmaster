@@ -1,6 +1,7 @@
 import React from "react";
 // 1. Importe o 'Link' do react-router-dom
-import { Link } from "react-router-dom";
+import LoadingLink from '../LoadingLink/LoadingLink';
+
 import "./SignUp.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
@@ -14,9 +15,9 @@ const SignUp = () => {
       <div className="right-panel">
         <div className="login-prompt">
           <p className="login-text">Você já tem uma conta?</p>
-          <Link to="/login" className="login-button">
+          <LoadingLink to="/login" className="login-button">
             Entre
-          </Link>
+          </LoadingLink>
         </div>
 
         <div className="form-container">
@@ -51,9 +52,9 @@ const SignUp = () => {
             - O 'to="/register"' aponta para a rota da página que criei.
             - Mantive a mesma className "email-button" para que o visual não mude.
           */}
-          <Link to="/register" className="email-button">
+          <LoadingLink to="/register" className="email-button">
             Cadastre-se com Email
-          </Link>
+          </LoadingLink>
         </div>
       </div>
     </div>
