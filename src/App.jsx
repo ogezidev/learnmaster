@@ -2,12 +2,10 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import './App.css';
-
-// Suas páginas existentes
 import LandingPage from "./pages/LandingPage";
-import Cadastro from "./pages/Cadastro"; // A sua página de cadastro original que você quer manter
-
+import Cadastro from "./pages/Cadastro"; 
 import RegisterPage from "./pages/RegisterPage"; 
+import AuthPage from './pages/AuthPage';
 
 function App() {
   return (
@@ -17,6 +15,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/cadastro" element={<Cadastro />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/auth" element={<AuthPage />} />
       </Routes>
     </Router>
   );

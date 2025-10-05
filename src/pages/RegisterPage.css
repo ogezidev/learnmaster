@@ -79,7 +79,7 @@ body {
 }
 #email, #name, #password {
   width: 100%;
-  height: 50px;
+  height: 60px;
   border-radius: 15px;
   font-size: 1rem;
   font-weight: 500;
@@ -160,4 +160,19 @@ body {
   text-align: center;
   font-size: 0.9rem;
   margin-top: 10px;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    /*
+    Este truque usa uma sombra interna (inset) da cor de fundo do seu input
+    para "pintar por cima" do azul padrão do navegador.
+    */
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    box-shadow: 0 0 0 30px white inset !important;
+
+    /* Opcional: Força a cor do texto para preto, caso o navegador a mude */
+    -webkit-text-fill-color: #000 !important;
 }
