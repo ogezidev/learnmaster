@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-import LoadingLink from '../components/LoadingLink/LoadingLink';
+import { Link } from 'react-router-dom';
+import { useLoading } from '../context/LoadingContext'; // <-- 1. IMPORTE O HOOK DO CONTEXTO
 
-// Importando seus componentes de input
+// Importando seus componentes
 import InputField from '../components/InputField/InputField';
 import PasswordField from '../components/InputField/PasswordField';
 import Checkbox from '../components/InputField/CheckBox';
 
-// Importando o CSS correto
+// Importando o CSS
 import './LoginPage.css'; 
 
-const LoginPage = ({ setIsLoading }) => {
+const LoginPage = () => { // <-- 2. REMOVA A PROP setIsLoading DAQUI
+  const { setIsLoading } = useLoading(); // <-- 3. PEGUE A FUNÇÃO DIRETAMENTE DO CONTEXTO
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
-  // Este é o estado local para o botão
   const [isLoadingLocal, setIsLoadingLocal] = useState(false); 
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -22,12 +24,10 @@ const LoginPage = ({ setIsLoading }) => {
     setErrorMessage('');
     setIsLoadingLocal(true);
     
-    // Ativa a tela de carregamento global
+    // Agora o setIsLoading funciona porque veio do contexto
     setIsLoading(true);
 
-    // Simula o tempo de verificação do login
     setTimeout(() => {
-      // Desativa ambas as telas de carregamento
       setIsLoading(false);
       setIsLoadingLocal(false);
       alert('Login efetuado (simulação)!');
@@ -35,12 +35,12 @@ const LoginPage = ({ setIsLoading }) => {
   };
 
   return (
+    // Seu JSX continua exatamente o mesmo
     <div className="login-container">
-      {/* PAINEL ESQUERDO (BRANCO) - Com o formulário */}
       <div className="login-left-panel">
         <div className="register-prompt">
           <p className="register-text">Você ainda não tem uma conta?</p>
-          <LoadingLink to="/register" className="register-button">Crie uma conta</LoadingLink>
+          <Link to="/register" className="register-button">Crie uma conta</Link>
         </div>
         
         <div className="login-form-wrapper">
@@ -73,12 +73,11 @@ const LoginPage = ({ setIsLoading }) => {
                     onChange={(e) => setRememberMe(e.target.checked)}
                     id="remember"
                 />
-                 <LoadingLink to="/forgot-password" className="forgot-password-link">Esqueceu a senha?</LoadingLink>
+                 <Link to="/forgot-password" className="forgot-password-link">Esqueceu a senha?</Link>
             </div>
 
             {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-            {/* --- CORREÇÃO AQUI --- */}
             <button type="submit" disabled={isLoadingLocal}>
               {isLoadingLocal ? 'Entrando...' : 'Entrar'}
             </button>
@@ -86,7 +85,6 @@ const LoginPage = ({ setIsLoading }) => {
         </div>
       </div>
 
-      {/* PAINEL DIREITO (AZUL) - Com a mensagem de boas-vindas */}
       <div className="login-right-panel">
         <h1>Faça o seu login no <br /> Learn Master</h1>
       </div>

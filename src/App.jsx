@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import { useLoading } from './context/LoadingContext'; // Importa nosso hook
 
 // Suas Páginas
 import LandingPage from './pages/LandingPage';
@@ -8,33 +9,30 @@ import RegisterPage from './pages/RegisterPage';
 import LoginPage from './pages/LoginPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 
-// Componente Auxiliar para gerenciar o estado em cada rota
-const PageWrapper = ({ children, setIsLoading }) => {
+// Componente que desliga o loading a cada mudança de rota
+const RouteChangeHandler = () => {
+  const { setIsLoading } = useLoading();
   const location = useLocation();
 
   useEffect(() => {
-    // Esta função será chamada toda vez que a URL mudar (nova página carregar)
-    // e esconderá a tela de carregamento.
     setIsLoading(false);
-  }, [location.pathname]); // A dependência é a mudança de URL
+  }, [location.pathname]);
 
-  // Passa a função setIsLoading para o componente filho (a página)
-  return React.cloneElement(children, { setIsLoading });
+  return null;
 };
 
 function App() {
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading } = useLoading(); // Pega o estado de carregamento do contexto
 
   return (
     <Router>
-      {/* A tela de carregamento será exibida sobre tudo quando isLoading for true */}
+      <RouteChangeHandler />
       {isLoading && <LoadingScreen />}
-
       <Routes>
-        <Route path="/" element={<PageWrapper setIsLoading={setIsLoading}><LandingPage /></PageWrapper>} />
-        <Route path="/cadastro" element={<PageWrapper setIsLoading={setIsLoading}><Cadastro /></PageWrapper>} />
-        <Route path="/register" element={<PageWrapper setIsLoading={setIsLoading}><RegisterPage /></PageWrapper>} />
-        <Route path="/login" element={<PageWrapper setIsLoading={setIsLoading}><LoginPage /></PageWrapper>} />
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/cadastro" element={<Cadastro />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/login" element={<LoginPage />} />
       </Routes>
     </Router>
   );

@@ -1,23 +1,20 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLoading } from '../../context/LoadingContext'; // Importa nosso hook
 
-const LoadingLink = ({ to, setIsLoading, children, className }) => {
+const LoadingLink = ({ to, children, className }) => {
+  const { setIsLoading } = useLoading(); // Pega a função do contexto
   const navigate = useNavigate();
 
   const handleClick = (e) => {
-    e.preventDefault(); // Impede a navegação padrão
-
-    // 1. Mostra a tela de carregamento
-    setIsLoading(true);
-
-    // 2. Espera um curto período para a animação ser visível e depois navega
+    e.preventDefault();
+    setIsLoading(true); // Liga a tela de carregamento
     setTimeout(() => {
-      navigate(to);
-    }, 400); // 400ms é um bom tempo para a transição
+      navigate(to); // Navega após um pequeno atraso
+    }, 400); 
   };
 
   return (
-    // Usamos uma tag <a>, mas o clique é controlado pelo React
     <a href={to} onClick={handleClick} className={className}>
       {children}
     </a>
