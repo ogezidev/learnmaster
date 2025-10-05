@@ -22,7 +22,6 @@ const PasswordField = ({ label, value, onChange, id }) => {
         required
       />
       <label htmlFor={id}>{label}</label>
-      <div className="input-border"></div>
       <span className="password-toggle" onClick={toggleShowPassword}>
         {showPassword ? <FaEyeSlash /> : <FaEye />}
       </span>

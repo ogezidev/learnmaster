@@ -20,7 +20,7 @@ const InputField = ({ label, type, value, onChange, id }) => {
         required
       />
       <label htmlFor={id}>{label}</label>
-      <div className="input-border"></div>
+
     </div>
   );
 };
