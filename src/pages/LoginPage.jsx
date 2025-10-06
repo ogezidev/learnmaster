@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useLoading } from '../context/LoadingContext'; // <-- 1. IMPORTE O HOOK DO CONTEXTO
+import { useLoading } from '../context/LoadingContext';
+import axios from 'axios'; // 1. IMPORTAMOS O AXIOS
 
-// Importando seus componentes
+// Seus componentes de input
 import InputField from '../components/InputField/InputField';
 import PasswordField from '../components/InputField/PasswordField';
 import Checkbox from '../components/InputField/CheckBox';
 
-// Importando o CSS
+// Seu CSS
 import './LoginPage.css'; 
 
-const LoginPage = () => { // <-- 2. REMOVA A PROP setIsLoading DAQUI
-  const { setIsLoading } = useLoading(); // <-- 3. PEGUE A FUNÇÃO DIRETAMENTE DO CONTEXTO
+const LoginPage = () => {
+  const { setIsLoading } = useLoading();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -19,23 +20,41 @@ const LoginPage = () => { // <-- 2. REMOVA A PROP setIsLoading DAQUI
   const [isLoadingLocal, setIsLoadingLocal] = useState(false); 
   const [errorMessage, setErrorMessage] = useState('');
 
-  const handleLoginSubmit = (e) => {
+  // --- 2. ESTA É A ÚNICA FUNÇÃO QUE MUDAMOS ---
+  const handleLoginSubmit = async (e) => { // Tornamos a função async
     e.preventDefault();
     setErrorMessage('');
     setIsLoadingLocal(true);
-    
-    // Agora o setIsLoading funciona porque veio do contexto
-    setIsLoading(true);
+    setIsLoading(true); // Ativa a tela de carregamento global
 
-    setTimeout(() => {
-      setIsLoading(false);
-      setIsLoadingLocal(false);
-      alert('Login efetuado (simulação)!');
-    }, 2000);
+    try {
+      const url = 'http://localhost:8080/api/v1/usuario/login';
+      
+      // Enviamos o email e a senha para o backend
+      const response = await axios.post(url, {
+        email: email,
+        senha: password // O backend espera 'senha'
+      });
+
+      // Se o backend respondeu com sucesso (código 200)
+      console.log('Login bem-sucedido:', response.data);
+      alert('Login efetuado com sucesso!');
+      // No futuro, você pode redirecionar para o dashboard aqui
+      // window.location.href = '/dashboard';
+
+    } catch (error) {
+      // Se o backend respondeu com erro (ex: 401 - não autorizado)
+      console.error('Erro no login:', error);
+      setErrorMessage('Email ou senha inválidos. Tente novamente.');
+    } finally {
+      // Esta parte sempre executa, com sucesso ou erro
+      setIsLoading(false); // Desativa a tela de carregamento global
+      setIsLoadingLocal(false); // Desativa o loading do botão
+    }
   };
 
+  // O resto do seu JSX continua exatamente o mesmo
   return (
-    // Seu JSX continua exatamente o mesmo
     <div className="login-container">
       <div className="login-left-panel">
         <div className="register-prompt">
@@ -45,10 +64,10 @@ const LoginPage = () => { // <-- 2. REMOVA A PROP setIsLoading DAQUI
         
         <div className="login-form-wrapper">
           <div className="logo-section">
-             <div className="logo">
-                <img src="/img/Logo.png" alt="Learn Master Logo" className="logo-image" />
-             </div>
-             <p className="learn-master-slogan">Memorize com a melhor plataforma educacional. <br />Seja LearnMaster.</p>
+            <div className="logo">
+              <img src="/img/Logo.png" alt="Learn Master Logo" className="logo-image" />
+            </div>
+            <p className="learn-master-slogan">Memorize com a melhor plataforma educacional. <br />Seja LearnMaster.</p>
           </div>
 
           <form onSubmit={handleLoginSubmit} className="login-form">
@@ -67,13 +86,13 @@ const LoginPage = () => { // <-- 2. REMOVA A PROP setIsLoading DAQUI
             />
             
             <div className="login-options">
-                <Checkbox
-                    label="Lembre de mim"
-                    checked={rememberMe}
-                    onChange={(e) => setRememberMe(e.target.checked)}
-                    id="remember"
-                />
-                 <Link to="/forgot-password" className="forgot-password-link">Esqueceu a senha?</Link>
+              <Checkbox
+                label="Lembre de mim"
+                checked={rememberMe}
+                onChange={(e) => setRememberMe(e.target.checked)}
+                id="remember"
+              />
+              <Link to="/forgot-password" className="forgot-password-link">Esqueceu a senha?</Link>
             </div>
 
             {errorMessage && <p className="error-message">{errorMessage}</p>}
