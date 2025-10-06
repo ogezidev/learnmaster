@@ -1,15 +1,23 @@
 .loading-overlay {
-  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-  background-color: rgba(255, 255, 255, 0.8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
   backdrop-filter: blur(4px);
-  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  display: flex;
+  flex-direction: column; /* Para que o texto fique abaixo do GIF */
+  justify-content: center;
+  align-items: center;
   z-index: 9999;
 }
-.spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #0052cc; /* Cor azul do seu design */
-  border-radius: 50%; width: 60px; height: 60px;
-  animation: spin 1s linear infinite;
+
+/* Novo estilo para a sua imagem GIF */
+.loading-gif {
+  margin: auto;
+  width: 400px; /* <<-- Ajuste este valor para o tamanho que você preferir */
+  height: auto;
 }
-.loading-overlay p { margin-top: 20px; font-size: 1.2rem; color: #333; font-family: 'Poppins', sans-serif;}
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+/* As animações @keyframes e a classe .spinner podem ser removidas deste arquivo */

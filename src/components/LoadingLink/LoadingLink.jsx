@@ -11,7 +11,7 @@ const LoadingLink = ({ to, children, className }) => {
     setIsLoading(true); // Liga a tela de carregamento
     setTimeout(() => {
       navigate(to); // Navega após um pequeno atraso
-    }, 400); 
+    }, 2400); 
   };
 
   return (

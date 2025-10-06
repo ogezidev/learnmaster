@@ -18,9 +18,7 @@ a {
   color: #646cff;
   text-decoration: inherit;
 }
-a:hover {
-  color: #535bf2;
-}
+
 
 html,
 body,
@@ -33,7 +31,7 @@ body,
   overflow-x: hidden !important; /* impede scroll lateral */
   box-sizing: border-box;
   font-family: "Inter", "Montserrat", Arial, Helvetica, sans-serif;
-  background-color: #f8f9fa; /* cor de fundo suave */
+  background-color: #ffffff; /* cor de fundo suave */
   color: #222; /* cor padrão do texto */
 }
 
@@ -49,9 +47,7 @@ img {
   height: auto;
   display: block;
   border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
   object-fit: cover;
-  background: #fff;
 }
 
 button {
