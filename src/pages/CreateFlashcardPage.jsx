@@ -1,20 +1,13 @@
 import React, { useState } from 'react';
-// 1. Importe o useNavigate para poder navegar entre as páginas
-import { useNavigate } from 'react-router-dom';
 import './CreateFlashcardPage.css';
 
 const CreateFlashcardPage = () => {
+  // Estado para controlar a animação de virada
   const [isFlipped, setIsFlipped] = useState(false);
-  // 2. Crie a função de navegação
-  const navigate = useNavigate();
 
+  // Função para alternar o estado
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
-  };
-
-  // 3. Crie a função para navegar para a seleção de deck
-  const goToDeckSelection = () => {
-    navigate('/selecionar-deck');
   };
 
   return (
@@ -23,9 +16,12 @@ const CreateFlashcardPage = () => {
         <h1 className="create-title">O que vamos memorizar hoje?</h1>
         <p className="create-subtitle">Crie e escolha o seu deck, e depois é só fazer o seu LearnCard!</p>
 
+        {/* --- CONTAINER PARA A CENA 3D --- */}
         <div className="flashcard-scene">
+          {/* Div que irá girar */}
           <div className={`flashcard-flipper ${isFlipped ? 'is-flipped' : ''}`}>
             
+            {/* FACE DA FRENTE */}
             <div className="flashcard-face flashcard-front">
               <div className="corner-fold front-fold"></div>
               <span className="flashcard-label front-label">Frente</span>
@@ -35,6 +31,7 @@ const CreateFlashcardPage = () => {
               ></textarea>
             </div>
             
+            {/* FACE DE TRÁS */}
             <div className="flashcard-face flashcard-back">
               <div className="corner-fold back-fold"></div>
               <span className="flashcard-label back-label">Atrás</span>
@@ -47,9 +44,10 @@ const CreateFlashcardPage = () => {
           </div>
         </div>
 
+        {/* --- BOTÕES --- */}
         <div className="create-buttons-container">
-          {/* 4. Adicione o onClick ao botão LearnDeck */}
-          <button className="create-btn btn-learndeck" onClick={goToDeckSelection}>LearnDeck</button>
+          <button className="create-btn btn-learndeck">LearnDeck</button>
+          {/* O botão "Virar" agora chama a função handleFlip */}
           <button className="create-btn btn-flip" onClick={handleFlip}>Virar</button>
         </div>
       </div>
