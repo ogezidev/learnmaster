@@ -1,0 +1,191 @@
+/* --- NOVO: Importa a fonte Inter do Google Fonts --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Container principal da página (SEU DESIGN MANTIDO) */
+.create-page-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("/img/FundoCriação.png");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Div branca maior (SEU DESIGN MANTIDO) */
+.create-content-box {
+  background-color: white;
+  border-radius: 25px;
+  padding: 25px;
+  text-align: center;
+  width: 100%;
+  max-width: 1400px;
+  max-height: 900px;
+}
+
+.create-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0060DA;
+  margin-bottom: 15px;
+}
+
+.create-subtitle {
+  font-size: 1.25rem;
+  color: #0060DA;
+  margin-bottom: 50px;
+}
+
+/* --- ESTRUTURA PARA ANIMAÇÃO 3D --- */
+.flashcard-scene {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  height: 450px;
+  margin: 0 auto;
+  perspective: 2000px;
+}
+
+.flashcard-flipper {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flashcard-flipper.is-flipped {
+  transform: rotateY(180deg);
+}
+
+.flashcard-face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 20px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* --- ESTILOS DAS FACES --- */
+.flashcard-front {
+  background-color: white;
+}
+
+.flashcard-back {
+  background-color: #0060DA;
+  transform: rotateY(180deg);
+}
+
+
+
+.front-fold {
+    right: 0;
+}
+.front-fold::before {
+    border-color: transparent #0060DA transparent transparent; 
+}
+
+.back-fold {
+    left: 0;
+    transform: scaleX(-1);
+}
+.back-fold::before {
+    border-color: transparent white transparent transparent;
+}
+
+
+/* Rótulos "Frente" e "Atrás" */
+.flashcard-label {
+  position: absolute;
+  top: 15px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  z-index: 2;
+}
+.front-label {
+  right: 15px;
+  color: #1F82EE; /* Texto branco sobre a dobra azul */
+}
+.back-label {
+  left: 15px;
+  color: white; /* Texto azul sobre a dobra branca */
+}
+
+/* --- ÁREA DE TEXTO COM OS NOVOS ESTILOS --- */
+.flashcard-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: transparent;
+  resize: none;
+  outline: none;
+  padding: 170px 40px 40px;
+  /* --- AJUSTES DE TEXTO --- */
+  font-family: 'Inter', sans-serif; /* 1. Nova fonte */
+  text-align: left;                 /* 2. Alinhado à esquerda */
+  font-size: 36px;                  /* 3. Tamanho da fonte */
+  font-weight: 600;                 /* 4. Semi Bold */
+}
+
+/* Cor do texto na FRENTE */
+.flashcard-front .flashcard-input {
+  color: #1F82EE;
+}
+
+/* Cor do texto ATRÁS */
+.flashcard-back .flashcard-input {
+  color: white;
+}
+
+.flashcard-input::placeholder {
+  color: #ccc;
+}
+
+.flashcard-back .flashcard-input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Botões (SEU DESIGN MANTIDO) */
+.create-buttons-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+.create-btn {
+  padding: 15px 40px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid;
+}
+.btn-learndeck {
+  background-color: #2095FE;
+  color: white;
+  border-color: #2095FE;
+}
+.btn-flip {
+  background-color: white;
+  color: #2095FE;
+  border-color: #2095FE;
+}
+.create-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade (SEU DESIGN MANTIDO) */
+@media (max-width: 768px) {
+  .create-content-box { padding: 30px 20px; }
+  .create-title { font-size: 2rem; }
+  .flashcard-scene { height: 300px; }
+  .flashcard-input { font-size: 24px; } /* Ajusta o tamanho da fonte para mobile */
+}

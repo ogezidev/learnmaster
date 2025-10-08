@@ -1,0 +1,230 @@
+/* Estilo geral do container da Home */
+.home-container {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 100vh;
+  padding: 40px 60px;
+  color: white;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  background-image: url("/img/FundoHome.PNG");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* Seção da Esquerda (Textos e Botões) */
+.home-left-section {
+  flex-basis: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 720px;
+}
+
+.home-logo {
+  width: 400px;
+  margin-bottom: 100px;
+  margin-top: -150px;
+  margin-left: -10px;
+}
+
+.home-title {
+  font-size: 5rem;
+  font-weight: bold;
+  line-height: 1.1;
+  margin-bottom: 25px;
+  margin-top: 0;
+  padding-left: 0;
+}
+
+.home-subtitle {
+  font-size: 1.5rem;
+  max-width: 650px;
+  margin-bottom: 40px;
+  margin-left: 0;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* Botões */
+.home-buttons {
+  display: flex;
+  gap: 25px;
+  padding-left: 0;
+}
+
+.home-btn {
+  padding: 18px 35px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.home-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.btn-study,
+.btn-create {
+  background-color: transparent;
+  border: 2px solid white;
+  color: white;
+}
+
+.btn-view-all {
+  background-color: white;
+  color: #0052cc;
+  border: 2px solid white;
+}
+
+/* --- SEÇÃO DA DIREITA --- */
+.home-right-section {
+  flex-basis: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 80px;
+  padding-left: 80px;
+}
+
+.card-stack-container {
+  position: relative;
+  width: 400px;
+  height: 500px;
+}
+
+/* Estilo base para todos os cards na pilha */
+.card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: center center;
+}
+
+/* Posição inicial dos cards de trás */
+.card-back-2 {
+  background-color: white;
+  transform: translateY(-50px) scale(0.9);
+  z-index: 1;
+}
+.card-back-1 {
+  background-color: white;
+  transform: translateY(-25px) scale(0.95);
+  z-index: 2;
+}
+.card-middle {
+  background-color: white;
+  z-index: 3;
+}
+.card-front {
+  background-color: white;
+  z-index: 4;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: none;
+  cursor: pointer;
+}
+
+/* Estrutura interna do card da frente */
+.card-image-container {
+  flex-grow: 1;
+  background-color: #f0f0f0;
+  width: 100%;
+  overflow: hidden;
+}
+.main-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.card-footer {
+  height: 170px;
+  width: 100%;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  flex-shrink: 0;
+  padding-top: 20px;
+}
+.footer-text-group {
+  display: flex;
+  flex-direction: column;
+}
+.footer-label {
+  font-size: 1rem;
+  color: white;
+  font-weight: 500;
+  border-radius: 5px;
+  width: 150px;
+  text-align: center;
+  background-color: #2095FE;
+}
+.footer-title {
+  color: #263972;
+  font-weight: bold;
+  font-size: 2.7rem;
+  line-height: 1.2;
+  padding-bottom: 120px;
+  padding-top: 20px;
+}
+
+/* --- ANIMAÇÃO FINAL CORRIGIDA --- */
+.card-stack-container:hover .card-front {
+  transform: translateY(-20px) scale(1.02);
+}
+
+.card-stack-container:hover .card-middle {
+  /* Mantém a posição vertical original (translateY(0)) enquanto se move para o lado */
+  transform: translateY(0) translateX(-60px) rotate(-4deg);
+}
+
+.card-stack-container:hover .card-back-1 {
+  /* Mantém a posição vertical original (translateY(-25px)) enquanto se move para o lado */
+  transform: translateY(-25px) translateX(60px) rotate(4deg) scale(0.95);
+}
+
+.card-stack-container:hover .card-back-2 {
+  /* Apenas sobe um pouco mais para dar profundidade, sem ir para os lados */
+  transform: translateY(-60px) scale(0.9);
+}
+
+
+/* --- SEÇÃO DE RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .home-container {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    padding: 40px;
+  }
+  .home-left-section {
+    align-items: center; margin: 0; margin-bottom: 60px;
+  }
+  .home-title { font-size: 3.5rem; }
+  .home-subtitle { font-size: 1.2rem; }
+  .home-right-section { margin-top: 20px; }
+  .card-stack-container { transform: scale(0.9); }
+  .home-logo { margin-top: 0; margin-left: 0; }
+}
+@media (max-width: 768px) {
+  .home-buttons { flex-direction: column; width: 100%; }
+  .home-btn { width: 100%; }
+  .home-title { font-size: 2.8rem; }
+  .home-subtitle { font-size: 1.1rem; }
+  .card-stack-container { transform: scale(0.85); }
+}

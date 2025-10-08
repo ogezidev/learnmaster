@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+// 1. ADICIONEI 'useNavigate' AQUI
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoading } from '../context/LoadingContext';
-import axios from 'axios'; // 1. IMPORTAMOS O AXIOS
+import axios from 'axios';
 
 // Seus componentes de input
 import InputField from '../components/InputField/InputField';
@@ -13,6 +14,8 @@ import './LoginPage.css';
 
 const LoginPage = () => {
   const { setIsLoading } = useLoading();
+  // 2. ADICIONEI ESTA LINHA
+  const navigate = useNavigate();
   
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -20,40 +23,36 @@ const LoginPage = () => {
   const [isLoadingLocal, setIsLoadingLocal] = useState(false); 
   const [errorMessage, setErrorMessage] = useState('');
 
-  // --- 2. ESTA É A ÚNICA FUNÇÃO QUE MUDAMOS ---
-  const handleLoginSubmit = async (e) => { // Tornamos a função async
+  const handleLoginSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage('');
     setIsLoadingLocal(true);
-    setIsLoading(true); // Ativa a tela de carregamento global
+    setIsLoading(true);
 
     try {
       const url = 'http://localhost:8080/api/v1/usuario/login';
       
-      // Enviamos o email e a senha para o backend
       const response = await axios.post(url, {
         email: email,
-        senha: password // O backend espera 'senha'
+        senha: password
       });
 
-      // Se o backend respondeu com sucesso (código 200)
       console.log('Login bem-sucedido:', response.data);
-      alert('Login efetuado com sucesso!');
-      // No futuro, você pode redirecionar para o dashboard aqui
-      // window.location.href = '/dashboard';
+      
+      // 3. ADICIONEI ESTAS DUAS LINHAS PARA SALVAR O TOKEN E REDIRECIONAR
+      localStorage.setItem('userToken', response.data.token); // Guarda o token para manter o login
+      navigate('/home'); // Redireciona para a página principal
 
     } catch (error) {
-      // Se o backend respondeu com erro (ex: 401 - não autorizado)
       console.error('Erro no login:', error);
       setErrorMessage('Email ou senha inválidos. Tente novamente.');
     } finally {
-      // Esta parte sempre executa, com sucesso ou erro
-      setIsLoading(false); // Desativa a tela de carregamento global
-      setIsLoadingLocal(false); // Desativa o loading do botão
+      setIsLoading(false);
+      setIsLoadingLocal(false);
     }
   };
 
-  // O resto do seu JSX continua exatamente o mesmo
+  // NENHUMA ALTERAÇÃO NO SEU DESIGN/JSX
   return (
     <div className="login-container">
       <div className="login-left-panel">

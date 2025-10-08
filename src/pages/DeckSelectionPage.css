@@ -1,0 +1,140 @@
+/* Container principal da página */
+.deck-selection-page-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-image: url("/img/FundoCriação.png"); /* Mesmo fundo da outra página */
+  background-size: cover;
+  background-position: center;
+}
+
+/* Div branca principal */
+.deck-selection-content-box {
+  background-color: white;
+  border-radius: 25px;
+  padding: 50px 60px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  width: 100%;
+  max-width: 1100px;
+}
+
+.deck-selection-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: #0060DA;
+  margin-bottom: 15px;
+}
+
+.deck-selection-subtitle {
+  font-size: 1.25rem;
+  color: #555;
+  margin-bottom: 50px;
+}
+
+/* Área azul onde os decks são exibidos */
+.decks-display-area {
+  background-color: #2881FF;
+  border-radius: 20px;
+  padding: 40px;
+  min-height: 300px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que os itens quebrem para a próxima linha */
+  gap: 25px; /* Espaço entre os decks */
+  align-content: flex-start; /* Alinha os itens no topo */
+}
+
+/* Estilo para cada item (LearnDeck ou Deck) */
+.deck-item {
+  background-color: white;
+  color: #263972;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 40px;
+  border-radius: 15px;
+  width: calc(25% - 20px); /* Ocupa 1/4 do espaço, com ajuste para o gap */
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.deck-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* Mensagem para quando não há decks */
+.empty-message {
+  width: 100%;
+  color: white;
+  font-size: 1.5rem;
+  align-self: center; /* Centraliza a mensagem verticalmente */
+}
+
+/* Container dos botões */
+.deck-selection-buttons {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.deck-selection-btn {
+  padding: 15px 40px;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid;
+}
+
+.btn-create-new {
+  background-color: #2095FE;
+  color: white;
+  border-color: #2095FE;
+}
+
+.btn-back {
+  background-color: white;
+  color: #888;
+  border-color: #ccc;
+}
+
+.deck-selection-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 1024px) {
+  .deck-item {
+    width: calc(33.33% - 20px); /* 3 itens por linha */
+  }
+}
+
+@media (max-width: 768px) {
+  .deck-selection-content-box {
+    padding: 30px 20px;
+  }
+  .decks-display-area {
+    padding: 25px;
+    gap: 15px;
+  }
+  .deck-item {
+    width: calc(50% - 10px); /* 2 itens por linha */
+    font-size: 1.2rem;
+    padding: 20px;
+  }
+  .deck-selection-buttons {
+    flex-direction: column;
+  }
+}

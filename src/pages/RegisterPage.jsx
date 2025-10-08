@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+// 1. ADICIONEI 'useNavigate' AQUI
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import LoadingLink from '../components/LoadingLink/LoadingLink';
 import InputField from '../components/InputField/InputField';
 import Checkbox from '../components/InputField/CheckBox';
 import PasswordField from '../components/InputField/PasswordField';
-import './RegisterPage.css'; // Usaremos este CSS atualizado
+import './RegisterPage.css';
 
 const RegisterPage = () => {
+  // 2. ADICIONEI ESTA LINHA
+  const navigate = useNavigate();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -38,11 +43,10 @@ const RegisterPage = () => {
       const response = await axios.post(API_URL, novoUsuario);
 
       console.log('Cadastro realizado com sucesso:', response.data);
-      setSuccessMessage('Conta criada com sucesso! Você já pode fazer o login.');
-      setName('');
-      setEmail('');
-      setPassword('');
-      setAgreedToTerms(false);
+
+      // 3. ADICIONEI ESTAS DUAS LINHAS PARA SALVAR O TOKEN E REDIRECIONAR
+      localStorage.setItem('userToken', response.data.token); // Guarda o token para auto-login
+      navigate('/home'); // Redireciona para a página principal
 
     } catch (error) {
       console.error('Erro ao cadastrar:', error);
@@ -52,6 +56,7 @@ const RegisterPage = () => {
     }
   };
 
+  // NENHUMA ALTERAÇÃO NO SEU DESIGN/JSX
   return (
     <div className="register-container">
       <div className="register-left">
@@ -64,10 +69,9 @@ const RegisterPage = () => {
         </div>
         <div className="register-form-wrapper">
           <div className="logo-placeholder">
-            {/* Você pode colocar sua logo aqui no futuro */}
             <div className="logo">
-            <img src="/img/Logo.png" alt="Learn Master Logo" className="logo-image" />
-          </div>
+              <img src="/img/Logo.png" alt="Learn Master Logo" className="logo-image" />
+            </div>
             <p className="learn-master-slogan">Memorize com a melhor plataforma educacional. <br />Seja LearnMaster.</p>
           </div>
 
