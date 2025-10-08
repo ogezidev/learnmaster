@@ -1,80 +1,51 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // 1. Importe o axios
 import './CreateDeckModal.css';
 
-// 2. Adicione a função para pegar o usuário
-const getLoggedInUser = () => {
-  const user = localStorage.getItem('loggedInUser');
-  return user ? JSON.parse(user) : null;
-};
+// O Modal recebe props para controlar sua visibilidade, o que ele deve criar e as funções para fechar e criar.
+const CreateDeckModal = ({ mode, onClose, onCreate }) => {
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
 
-// 3. Receba uma nova prop `onDeckCreated` para atualizar a lista de decks na página anterior
-function CreateDeckModal({ isOpen, onClose, onDeckCreated }) {
-  const [deckName, setDeckName] = useState('');
-  const [error, setError] = useState('');
-
-  // 4. Crie a função para lidar com o envio do formulário
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
-
-    if (!deckName.trim()) {
-      setError('O nome do deck não pode estar vazio.');
-      return;
-    }
-
-    const loggedInUser = getLoggedInUser();
-    if (!loggedInUser) {
-      setError('Você precisa estar logado para criar um deck.');
-      return;
-    }
-
-    // 5. Monte o objeto que será enviado para a API
-    const newDeckData = {
-      nome: deckName,
-      usuario: {
-        id: loggedInUser.id, // Associa o deck ao usuário logado
-      },
-    };
-
-    try {
-      // 6. Faça a requisição POST para o back-end
-      const response = await axios.post('http://localhost:8080/api/v1/folder', newDeckData);
-      
-      // 7. Se deu certo:
-      onDeckCreated(response.data); // Executa a função do componente pai para atualizar a lista
-      setDeckName(''); // Limpa o input
-      onClose(); // Fecha o modal
-    } catch (err) {
-      setError('Ocorreu um erro ao criar o deck. Tente novamente.');
-      console.error(err);
+  const handleCreate = () => {
+    if (name.trim()) { // Só cria se o nome não estiver vazio
+      onCreate({ name, description });
+      onClose(); // Fecha o modal após a criação
+    } else {
+      alert('Por favor, insira um nome.');
     }
   };
 
-  if (!isOpen) {
-    return null;
-  }
+  // Não renderiza nada se não for para estar aberto
+  if (!mode) return null;
+
+  const title = mode === 'learndeck' ? 'Crie seu LearnDeck' : 'Crie seu Deck';
+  const namePlaceholder = mode === 'learndeck' ? 'Ex: Programação' : 'Ex: JavaScript';
+  const descPlaceholder = mode === 'learndeck' ? 'Fale sobre o seu LearnDeck (opcional)' : 'Fale sobre o seu Deck (opcional)';
 
   return (
-    <div className="modal-overlay">
-      <div className="modal-content">
-        <h2>Criar Novo Deck</h2>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="Nome do Deck"
-            value={deckName}
-            onChange={(e) => setDeckName(e.target.value)}
-          />
-          {error && <p className="error-message">{error}</p>}
-          <div className="modal-actions">
-            <button type="submit" className="create-button">Criar</button>
-            <button type="button" onClick={onClose} className="cancel-button">Cancelar</button>
-          </div>
-        </form>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+        <h2>{title}</h2>
+        <input
+          type="text"
+          className="modal-input"
+          placeholder={namePlaceholder}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <textarea
+          className="modal-textarea"
+          placeholder={descPlaceholder}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        ></textarea>
+        <div className="modal-buttons">
+          <button className="modal-btn btn-cancel" onClick={onClose}>Cancelar</button>
+          <button className="modal-btn btn-create" onClick={handleCreate}>Criar</button>
+        </div>
       </div>
     </div>
   );
-}
+};
 
 export default CreateDeckModal;
