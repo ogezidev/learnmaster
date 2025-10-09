@@ -19,7 +19,7 @@ const HomePage = () => {
           <Link to="/criar-flashcard" className="home-btn btn-create">Crie seu flashcard</Link>
           
           {/* Botão "Ver todos" leva para a seleção de decks */}
-          <Link to="/selecionar-deck" className="home-btn btn-view-all">Ver todos</Link>
+          <Link to="/Vertodos" className="home-btn btn-view-all">Ver todos</Link>
         </div>
       </div>
       

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+// REMOVIDO: import { useNavigate } from 'react-router-dom';
 import './CreateDeckModal.css';
 
 // A propriedade agora se chama 'onCreate' para corresponder ao que a página pai envia.
@@ -12,10 +13,14 @@ const CreateDeckModal = ({ isOpen, mode, onClose, onCreate }) => {
     }
   }, [isOpen]);
 
-  const handleCreateClick = () => {
+  const handleCreateClick = async () => { // Mantido async por boa prática
     if (name.trim()) {
       // Chama a função 'onCreate' que foi passada pela página pai.
-      onCreate({ name });
+      // A navegação para /vertodos será feita APENAS após o Flashcard ser salvo
+      // na página DeckSelectionPage.jsx.
+      await onCreate({ name });
+      
+      // O modal será fechado pela função onCreate da página pai (setIsModalOpen(false))
     } else {
       alert('Por favor, insira um nome.');
     }

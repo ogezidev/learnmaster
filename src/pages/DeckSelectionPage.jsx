@@ -47,7 +47,8 @@ const DeckSelectionPage = () => {
     try {
       await axios.post('http://localhost:8080/api/v1/flashcard', newFlashcard);
       alert('Flashcard criado com sucesso!');
-      navigate('/home');
+      // CORREÇÃO FINAL: Redireciona para o INÍCIO (/home) conforme solicitado.
+      navigate('/home'); 
     } catch (error) {
       console.error("Erro ao criar flashcard:", error);
       alert('Não foi possível criar o flashcard.');
@@ -65,11 +66,12 @@ const DeckSelectionPage = () => {
       const response = await axios.post('http://localhost:8080/api/v1/folder', newDeckData);
       const newDeck = response.data;
       setDecks(prevDecks => [...prevDecks, newDeck]);
+      // Permanece na página de seleção para o usuário clicar no novo deck.
     } catch (error) {
       console.error("Erro ao criar o deck:", error);
       alert("Não foi possível criar o deck.");
     }
-    setIsModalOpen(false);
+    setIsModalOpen(false); // Fecha o modal
   };
 
   return (
