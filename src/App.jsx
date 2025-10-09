@@ -11,6 +11,8 @@ import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import HomePage from './pages/HomePage';
 import CreateFlashcardPage from './pages/CreateFlashcardPage';
 import DeckSelectionPage from './pages/DeckSelectionPage';
+// 1. IMPORTAÇÃO ADICIONADA:
+import VerTodos from './pages/VerTodos'; 
 
 // --- COMPONENTES ---
 const RouteChangeHandler = () => {
@@ -50,7 +52,6 @@ function App() {
           element={<PrivateRoute><HomePage /></PrivateRoute>}
         />
         
-        {/* Rota para a página de criação, SEM ID */}
         <Route
           path="/criar-flashcard" 
           element={<PrivateRoute><CreateFlashcardPage /></PrivateRoute>}
@@ -59,6 +60,12 @@ function App() {
         <Route
           path="/selecionar-deck"
           element={<PrivateRoute><DeckSelectionPage /></PrivateRoute>}
+        />
+
+        {/* 2. ROTA ADICIONADA: Mapeia /vertodos para o componente VerTodos */}
+        <Route
+          path="/vertodos"
+          element={<PrivateRoute><VerTodos /></PrivateRoute>}
         />
 
         {/* Rota padrão */}

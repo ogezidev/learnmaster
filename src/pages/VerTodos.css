@@ -1,0 +1,160 @@
+/* VerTodos.css - visual fiel à imagem com caixa de texto e cards maiores */
+
+.ver-todos-page-container {
+    min-height: 100vh;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 40px;
+}
+
+.ver-todos-content-box {
+    background: none;
+    width: 1050px;
+    max-width: 98vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.deck-selection-title {
+    font-size: 2.2rem;
+    color: #1669e5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    margin-bottom: 28px;
+    margin-top: 0;
+    text-align: center;
+}
+
+/* Caixa de busca bem grande, centralizada */
+.search-input {
+    width: 100%;
+    max-width: 900px;
+    height: 62px;
+    font-size: 1.35rem;
+    color: #444;
+    padding: 0 30px;
+    border-radius: 15px;
+    border: 2px solid #1670e5;
+    margin-bottom: 46px;
+    outline: none;
+    box-sizing: border-box;
+    background: #fff;
+    transition: border-color 0.2s;
+}
+.search-input:focus {
+    border-color: #094bb7;
+}
+
+/* Grid azul: espaçoso para cards maiores */
+.decks-display-area {
+    width: 100%;
+    background: #0666df;
+    border-radius: 16px;
+    padding: 36px 32px 36px 32px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 54px 42px;
+    justify-items: center;
+    min-height: 600px;
+    max-height: 700px;
+    overflow-y: auto;
+}
+
+/* Cards/células bem grandes */
+.deck-item, .deck-item-internal {
+    background: #fff;
+    border-radius: 18px;
+    color: #1670e5;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.7rem;
+    font-weight: 700;
+    box-shadow: 0 2px 16px rgba(22, 105, 229, 0.18);
+    padding: 100px 0;        /* Bem "gordinho" verticalmente */
+    width: 390px;
+    text-align: center;
+    cursor: pointer;
+    transition: box-shadow 0.2s, transform 0.18s;
+    border: none;
+    margin: 0 auto;
+}
+
+.deck-item:hover, .deck-item-internal:hover {
+    box-shadow: 0 8px 28px rgba(22, 105, 229, 0.28);
+    transform: scale(1.04);
+}
+
+.deck-selection-buttons {
+    width: 100%;
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.deck-selection-btn.btn-back {
+    background: #154fd2;
+    color: #fff;
+    border: none;
+    border-radius: 13px;
+    padding: 14px 38px;
+    font-size: 1.13rem;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s;
+    box-shadow: 0 1px 4px rgba(22, 105, 229, 0.11);
+}
+
+.deck-selection-btn.btn-back:hover {
+    background: #0a3c8c;
+}
+
+.empty-message {
+    background: none;
+    color: #fff;
+    font-size: 1.28rem;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 16px;
+    text-align: center;
+    grid-column: 1 / span 2;
+}
+
+/* Responsividade especial */
+@media (max-width: 1100px) {
+    .ver-todos-content-box {
+        width: 98vw;
+        padding: 0 8px;
+    }
+
+    .deck-item, .deck-item-internal {
+        width: 44vw;
+        max-width: 350px;
+        font-size: 1.23rem;
+        padding: 48px 0;
+    }
+    .decks-display-area {
+        padding: 28px 1vw 28px 1vw;
+        min-height: 420px;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px 14px;
+    }
+    .search-input {
+        max-width: 96vw;
+    }
+}
+@media (max-width: 680px) {
+    .decks-display-area {
+        grid-template-columns: 1fr;
+        gap: 20px 0;
+        min-height: 340px;
+    }
+    .deck-item, .deck-item-internal {
+        width: 99vw;
+        max-width: none;
+        padding: 36px 0;
+        font-size: 1.1rem;
+    }
+}

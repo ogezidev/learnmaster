@@ -1,26 +1,31 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './CreateDeckModal.css';
 
-// O Modal recebe props para controlar sua visibilidade, o que ele deve criar e as funções para fechar e criar.
-const CreateDeckModal = ({ mode, onClose, onCreate }) => {
+// A propriedade agora se chama 'onCreate' para corresponder ao que a página pai envia.
+const CreateDeckModal = ({ isOpen, mode, onClose, onCreate }) => {
   const [name, setName] = useState('');
-  const [description, setDescription] = useState('');
 
-  const handleCreate = () => {
-    if (name.trim()) { // Só cria se o nome não estiver vazio
-      onCreate({ name, description });
-      onClose(); // Fecha o modal após a criação
+  // Limpa o nome quando o modal é fechado ou o modo muda
+  useEffect(() => {
+    if (!isOpen) {
+      setName('');
+    }
+  }, [isOpen]);
+
+  const handleCreateClick = () => {
+    if (name.trim()) {
+      // Chama a função 'onCreate' que foi passada pela página pai.
+      onCreate({ name });
     } else {
       alert('Por favor, insira um nome.');
     }
   };
 
-  // Não renderiza nada se não for para estar aberto
-  if (!mode) return null;
+  // Se não for para estar aberto, não renderiza nada.
+  if (!isOpen) return null;
 
-  const title = mode === 'learndeck' ? 'Crie seu LearnDeck' : 'Crie seu Deck';
-  const namePlaceholder = mode === 'learndeck' ? 'Ex: Programação' : 'Ex: JavaScript';
-  const descPlaceholder = mode === 'learndeck' ? 'Fale sobre o seu LearnDeck (opcional)' : 'Fale sobre o seu Deck (opcional)';
+  const title = mode === 'learndeck' ? 'Crie sua Categoria' : 'Crie seu Deck';
+  const namePlaceholder = mode === 'learndeck' ? 'Ex: Programação' : 'Ex: JavaScript Básico';
 
   return (
     <div className="modal-overlay" onClick={onClose}>
@@ -32,16 +37,11 @@ const CreateDeckModal = ({ mode, onClose, onCreate }) => {
           placeholder={namePlaceholder}
           value={name}
           onChange={(e) => setName(e.target.value)}
+          autoFocus
         />
-        <textarea
-          className="modal-textarea"
-          placeholder={descPlaceholder}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-        ></textarea>
         <div className="modal-buttons">
           <button className="modal-btn btn-cancel" onClick={onClose}>Cancelar</button>
-          <button className="modal-btn btn-create" onClick={handleCreate}>Criar</button>
+          <button className="modal-btn btn-create" onClick={handleCreateClick}>Criar</button>
         </div>
       </div>
     </div>
