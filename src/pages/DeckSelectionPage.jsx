@@ -10,16 +10,12 @@ const getLoggedInUser = () => {
 };
 
 const DeckSelectionPage = () => {
-  const [learnDecks, setLearnDecks] = useState([]);
-  const [decks, setDecks] = useState({});
-  const [currentView, setCurrentView] = useState('learndecks');
-  const [selectedLearnDeck, setSelectedLearnDeck] = useState(null);
+  const [decks, setDecks] = useState([]); // Agora é um array simples de decks
   const [loading, setLoading] = useState(true);
-  const [modalMode, setModalMode] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Pega os dados do flashcard (frente e verso) que vieram da página anterior
   const { frente, verso } = location.state || {};
 
   useEffect(() => {
@@ -29,50 +25,29 @@ const DeckSelectionPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(`http://localhost:8080/api/v1/folder/user/${user.id}`);
-        const allDecks = response.data || [];
-        
-        // Agrupa os decks por categoria (statusPasta), ignorando 'ATIVO'
-        const groupedDecks = allDecks.reduce((acc, deck) => {
-          const groupName = deck.statusPasta;
-          // Ignora qualquer deck que tenha 'ATIVO' ou não tenha categoria definida
-          if (groupName && groupName !== 'ATIVO') {
-            if (!acc[groupName]) { acc[groupName] = []; }
-            acc[groupName].push(deck);
-          }
-          return acc;
-        }, {});
-
-        const newLearnDecks = Object.keys(groupedDecks).map(name => ({ id: name, name: name }));
-        setLearnDecks(newLearnDecks);
-        setDecks(groupedDecks);
+        setDecks(response.data || []); // Salva a lista de decks diretamente
       } catch (error) {
-        if (error.response && error.response.status !== 204) { console.error("Erro ao buscar decks:", error); }
-      } finally { setLoading(false); }
+        if (error.response && error.response.status !== 204) {
+          console.error("Erro ao buscar decks:", error);
+        }
+      } finally {
+        setLoading(false);
+      }
     };
     fetchData();
   }, []);
 
-  const handleLearnDeckClick = (learnDeck) => {
-    setSelectedLearnDeck(learnDeck);
-    setCurrentView('decks');
-  };
-
-  const handleBackClick = () => {
-    setSelectedLearnDeck(null);
-    setCurrentView('learndecks');
-  };
-
-  // --- FUNÇÃO FINAL: SELECIONA O DECK E SALVA O FLASHCARD ---
   const handleDeckSelectAndSave = async (deck) => {
     if (!frente || !verso) {
       alert("Erro: Dados do flashcard não encontrados. Volte e tente novamente.");
+      navigate('/criar-flashcard');
       return;
     }
     const newFlashcard = { frente, verso, folder: { id: deck.id } };
     try {
       await axios.post('http://localhost:8080/api/v1/flashcard', newFlashcard);
       alert('Flashcard criado com sucesso!');
-      navigate('/home'); // VOLTA PARA A HOME
+      navigate('/home');
     } catch (error) {
       console.error("Erro ao criar flashcard:", error);
       alert('Não foi possível criar o flashcard.');
@@ -83,66 +58,45 @@ const DeckSelectionPage = () => {
     const user = getLoggedInUser();
     if (!user) { alert("Usuário não encontrado."); return; }
 
-    if (modalMode === 'learndeck') {
-      const learnDeckExists = learnDecks.some(ld => ld.name.toLowerCase() === name.toLowerCase());
-      if (learnDeckExists) {
-        alert("Já existe um LearnDeck com esse nome.");
-        return;
-      }
-      const newLearnDeck = { id: name, name };
-      setLearnDecks([...learnDecks, newLearnDeck]);
-      setDecks({ ...decks, [newLearnDeck.id]: [] });
-    }
+    // O back-end vai salvar 'statusPasta' como 'ATIVO' por padrão
+    const newDeckData = { nome: name, usuario: { id: user.id } };
 
-    if (modalMode === 'deck') {
-      if (!selectedLearnDeck) { alert("Selecione um LearnDeck primeiro."); return; }
-      const newDeckData = { nome: name, usuario: { id: user.id }, statusPasta: selectedLearnDeck.name };
-      try {
-        const response = await axios.post('http://localhost:8080/api/v1/folder', newDeckData);
-        const newDeck = response.data;
-        const updatedDecks = { ...decks };
-        if (!updatedDecks[selectedLearnDeck.id]) { updatedDecks[selectedLearnDeck.id] = []; }
-        updatedDecks[selectedLearnDeck.id].push(newDeck);
-        setDecks(updatedDecks);
-      } catch (error) {
-        console.error("Erro ao criar o deck:", error);
-        alert("Não foi possível criar o deck. Verifique se o nome do LearnDeck é válido.");
-      }
+    try {
+      const response = await axios.post('http://localhost:8080/api/v1/folder', newDeckData);
+      const newDeck = response.data;
+      setDecks(prevDecks => [...prevDecks, newDeck]);
+    } catch (error) {
+      console.error("Erro ao criar o deck:", error);
+      alert("Não foi possível criar o deck.");
     }
-    setModalMode(null);
+    setIsModalOpen(false);
   };
 
   return (
     <>
-      <CreateDeckModal isOpen={modalMode !== null} mode={modalMode} onClose={() => setModalMode(null)} onCreate={handleCreate} />
+      <CreateDeckModal
+        isOpen={isModalOpen}
+        mode="deck" // O modal sempre será para criar um Deck
+        onClose={() => setIsModalOpen(false)}
+        onCreate={handleCreate}
+      />
       <div className="deck-selection-page-container">
         <div className="deck-selection-content-box">
-          <h1 className="deck-selection-title">
-            {currentView === 'learndecks' ? 'Escolha a Categoria' : `Decks em "${selectedLearnDeck?.name}"`}
-          </h1>
+          <h1 className="deck-selection-title">Escolha o Deck</h1>
           <p className="deck-selection-subtitle">Selecione o deck final para salvar seu flashcard.</p>
 
           <div className="decks-display-area">
-            {loading ? <p className="empty-message">Carregando...</p> : 
-              (currentView === 'learndecks' ? (
-                learnDecks.length > 0 ? learnDecks.map(learnDeck => (
-                  <div key={learnDeck.id} className="deck-item" onClick={() => handleLearnDeckClick(learnDeck)}>
-                    {learnDeck.name}
-                  </div>
-                )) : <p className="empty-message">Nenhum LearnDeck encontrado. Crie um!</p>
-              ) : (
-                decks[selectedLearnDeck?.id]?.length > 0 ? decks[selectedLearnDeck.id].map(deck => (
-                  <div key={deck.id} className="deck-item" onClick={() => handleDeckSelectAndSave(deck)}>
-                    {deck.nome}
-                  </div>
-                )) : <p className="empty-message">Nenhum deck neste Learndeck. Crie um!</p>
-              ))
-            }
+            {loading ? <p className="empty-message">Carregando...</p> : (
+              decks.length > 0 ? decks.map(deck => (
+                <div key={deck.id} className="deck-item" onClick={() => handleDeckSelectAndSave(deck)}>
+                  {deck.nome}
+                </div>
+              )) : <p className="empty-message">Nenhum deck encontrado. Crie um!</p>
+            )}
           </div>
           <div className="deck-selection-buttons">
-            {currentView === 'decks' && <button className="deck-selection-btn btn-back" onClick={handleBackClick}>Voltar</button>}
-            <button className="deck-selection-btn btn-create-new" onClick={() => setModalMode(currentView === 'learndecks' ? 'learndeck' : 'deck')}>
-              {currentView === 'learndecks' ? 'Criar Categoria' : 'Criar Deck'}
+            <button className="deck-selection-btn btn-create-new" onClick={() => setIsModalOpen(true)}>
+              Criar Novo Deck
             </button>
           </div>
         </div>

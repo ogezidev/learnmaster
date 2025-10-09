@@ -30,7 +30,7 @@ const LoginPage = () => {
     try {
       // --- CORREÇÃO APLICADA AQUI ---
       // A URL foi alterada de "/usuario/login" para "/usuarios/login"
-      const url = 'http://localhost:8080/api/v1/usuarios/login';
+      const url = 'http://localhost:8080/api/v1/usuario/login';
       
       const response = await axios.post(url, {
         email: email,
