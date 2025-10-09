@@ -10,7 +10,7 @@ import LoginPage from './pages/LoginPage';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import HomePage from './pages/HomePage';
 import CreateFlashcardPage from './pages/CreateFlashcardPage';
-import DeckSelectionPage from './pages/DeckSelectionPage'; // Importe a nova página
+import DeckSelectionPage from './pages/DeckSelectionPage';
 
 // --- COMPONENTES ---
 const RouteChangeHandler = () => {
@@ -44,18 +44,18 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
 
-        {/* --- ROTAS PRIVADAS (PARA USUÁRIOS LOGADOS) --- */}
+        {/* --- ROTAS PRIVADAS --- */}
         <Route
           path="/home"
           element={<PrivateRoute><HomePage /></PrivateRoute>}
         />
         
+        {/* Rota para a página de criação, SEM ID */}
         <Route
-          path="/criar-flashcard"
+          path="/criar-flashcard" 
           element={<PrivateRoute><CreateFlashcardPage /></PrivateRoute>}
         />
 
-        {/* Rota para a nova página de seleção de decks */}
         <Route
           path="/selecionar-deck"
           element={<PrivateRoute><DeckSelectionPage /></PrivateRoute>}

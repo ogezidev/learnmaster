@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-// 1. ADICIONEI 'useNavigate' AQUI
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoading } from '../context/LoadingContext';
 import axios from 'axios';
@@ -14,7 +13,6 @@ import './LoginPage.css';
 
 const LoginPage = () => {
   const { setIsLoading } = useLoading();
-  // 2. ADICIONEI ESTA LINHA
   const navigate = useNavigate();
   
   const [email, setEmail] = useState('');
@@ -30,7 +28,9 @@ const LoginPage = () => {
     setIsLoading(true);
 
     try {
-      const url = 'http://localhost:8080/api/v1/usuario/login';
+      // --- CORREÇÃO APLICADA AQUI ---
+      // A URL foi alterada de "/usuario/login" para "/usuarios/login"
+      const url = 'http://localhost:8080/api/v1/usuarios/login';
       
       const response = await axios.post(url, {
         email: email,
@@ -39,9 +39,19 @@ const LoginPage = () => {
 
       console.log('Login bem-sucedido:', response.data);
       
-      // 3. ADICIONEI ESTAS DUAS LINHAS PARA SALVAR O TOKEN E REDIRECIONAR
-      localStorage.setItem('userToken', response.data.token); // Guarda o token para manter o login
-      navigate('/home'); // Redireciona para a página principal
+      const userData = response.data;
+
+      // Salva o token para autenticação
+      // (Se seu backend não enviar um token, esta linha pode dar erro, mas vamos mantê-la por enquanto)
+      if (userData.token) {
+        localStorage.setItem('userToken', userData.token); 
+      }
+      
+      // Salva o objeto do usuário completo para uso em outras páginas
+      localStorage.setItem('loggedInUser', JSON.stringify(userData));
+
+      // Redireciona para a página principal
+      navigate('/home'); 
 
     } catch (error) {
       console.error('Erro no login:', error);
@@ -52,7 +62,6 @@ const LoginPage = () => {
     }
   };
 
-  // NENHUMA ALTERAÇÃO NO SEU DESIGN/JSX
   return (
     <div className="login-container">
       <div className="login-left-panel">

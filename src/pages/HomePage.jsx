@@ -12,9 +12,14 @@ const HomePage = () => {
           Memorize mais rápido e de forma duradoura com o método de Flashcards, o mais eficaz para estudos acadêmicos.
         </p>
         <div className="home-buttons">
-          <Link to="/estudar" className="home-btn btn-study">Estudar LearnDeck</Link>
+          {/* --- CORREÇÃO 1: Botão "Estudar" AGORA SEM LINK --- */}
+          <button className="home-btn btn-study">Estudar LearnDeck</button>
+          
+          {/* CORREÇÃO 2: Botão "Criar" leva para a página de criação de flashcard */}
           <Link to="/criar-flashcard" className="home-btn btn-create">Crie seu flashcard</Link>
-          <Link to="/ver-todos" className="home-btn btn-view-all">Ver todos</Link>
+          
+          {/* Botão "Ver todos" leva para a seleção de decks */}
+          <Link to="/selecionar-deck" className="home-btn btn-view-all">Ver todos</Link>
         </div>
       </div>
       
@@ -32,7 +37,6 @@ const HomePage = () => {
             </div>
 
             <div className="card-footer">
-              {/* Div para agrupar os dois textos */}
               <div className="footer-text-group">
                 <span className="footer-label">LearnDeck</span>
                 <span className="footer-title">Matematica</span>
