@@ -19,6 +19,9 @@ import CreateFlashcardPage from "./pages/CreateFlashcardPage";
 import DeckSelectionPage from "./pages/DeckSelectionPage";
 // 1. IMPORTAÇÃO ADICIONADA:
 import VerTodos from "./pages/VerTodos";
+import CrudPage from "./pages/CrudPage";
+// NOTA: A rota /admin abaixo vai falhar
+// porque 'AdminPage' não está importado aqui.
 
 // --- COMPONENTES ---
 const RouteChangeHandler = () => {
@@ -99,7 +102,32 @@ function App() {
           }
         />
 
-        {/* Rota padrão */}
+        {/* 3. ROTA CRUD ADICIONADA: Mapeia /crud para o componente CrudPage */}
+        <Route
+          path="/crud"
+          element={
+            <PrivateRoute>
+              <CrudPage />
+            </PrivateRoute>
+          }
+        />
+
+        {/* Rota de Admin (COMENTADA)
+            Eu comentei esta rota porque 'AdminPage' não foi importado
+            no topo do arquivo e isso causaria um erro.
+            Descomente quando você importar o componente AdminPage.
+        */}
+        {/* <Route
+          path="/admin"
+          element={
+            <PrivateRoute role="ADMIN">
+              <AdminPage />
+            </PrivateRoute>
+          }
+        /> */}
+
+        {/* Rota padrão (Curinga) */}
+        {/* É uma boa prática deixar a rota "*" por último */}
         <Route
           path="*"
           element={
@@ -110,7 +138,6 @@ function App() {
             )
           }
         />
-      
       </Routes>
     </Router>
   );

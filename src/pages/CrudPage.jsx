@@ -133,8 +133,7 @@ const CrudPage = () => {
     <div className="crud-container">
       <nav className="crud-sidebar">
         <div className="sidebar-logo">
-          <img src="/img/Logo.png" alt="Learn Master Logo" /> 
-          <span>LearnMaster</span>
+          <img className="logobrancacrud" src="/img/LogoBranca.png" alt="Learn Master Logo" /> 
         </div>
         <button className="sidebar-button active">
           {/* Ícone de Usuários do Figma */}
@@ -244,7 +243,7 @@ const CrudPage = () => {
           <div className="modal-content modal-delete-confirm" onClick={(e) => e.stopPropagation()}>
             <h2>Tem certeza que deseja excluir {currentUser.nome}?</h2>
             <p>Você pode inativar ao invés de excluir o usuário.</p>
-            <button onClick={handleDeleteUser} className="modal-btn btn-delete-confirm">
+            <button onClick={handleDeleteUser} className="modal-btn btn-delete-confirm" id="confirmDeleteBtn">
               Excluir
             </button>
           </div>

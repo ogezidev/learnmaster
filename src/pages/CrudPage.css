@@ -1,21 +1,39 @@
 /* --- Cores Base (do Figma) --- */
 :root {
-  --cor-azul-sidebar: #0B57CF; /* Azul do LearnMaster */
+  --cor-azul-sidebar: #0b57cf; /* Azul do LearnMaster */
   --cor-fundo-main: #f0f2f5;
   --cor-fundo-tabela: #ffffff;
   --cor-texto-principal: #333;
   --cor-texto-secundario: #555;
   --cor-borda: #e0e0e0;
-  --cor-vermelho: #D93025;
-  --cor-verde: #1E8E3E;
+  --cor-vermelho: #d93025;
+  --cor-verde: #1e8e3e;
   --cor-overlay: rgba(0, 0, 0, 0.6);
 }
-
+h1 {
+  margin: 0;
+  padding: 0;
+  font-size: 30px;
+  font-weight: 600;
+  color: #000000;
+  line-height: 1.4;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
+h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  font-family: "Bricolage Grotesque", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "wdth" 100;
+}
 /* --- Layout Básico --- */
 .crud-container {
   display: flex;
   height: 100vh;
-  font-family: Arial, sans-serif;
   background-color: var(--cor-fundo-main);
 }
 
@@ -25,16 +43,10 @@
   padding: 24px;
   color: white;
 }
-.sidebar-logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 40px;
-}
-.sidebar-logo img {
-  width: 32px;
+
+.logobrancacrud {
+  width: 210px;
+  padding-bottom: 120px;
 }
 .sidebar-button {
   display: flex;
@@ -109,14 +121,15 @@
 .table-wrapper {
   background-color: var(--cor-fundo-tabela);
   border-radius: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   overflow: hidden;
 }
 .users-table {
   width: 100%;
   border-collapse: collapse;
 }
-.users-table th, .users-table td {
+.users-table th,
+.users-table td {
   padding: 16px 20px;
   text-align: left;
   border-bottom: 1px solid var(--cor-borda);
@@ -165,7 +178,7 @@
 .modal-content {
   background-color: white;
   border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   padding: 24px;
 }
 
@@ -212,10 +225,12 @@
 /* Modal de Excluir (Frame 6) */
 .modal-delete-confirm {
   text-align: center;
-  max-width: 450px;
+  max-width: 700px;
   padding: 40px;
 }
+
 .modal-delete-confirm h2 {
+  text-align: center;
   color: var(--cor-texto-principal);
   margin-top: 0;
   margin-bottom: 12px;
