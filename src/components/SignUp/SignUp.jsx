@@ -1,10 +1,12 @@
 import React from "react";
-// 1. Importe o 'Link' do react-router-dom
-import LoadingLink from '../LoadingLink/LoadingLink';
+// 1. Importe o 'Link' padrão do react-router-dom
+import { Link } from 'react-router-dom'; 
 
 import "./SignUp.css";
 import { FcGoogle } from "react-icons/fc";
 import { FaMicrosoft } from "react-icons/fa";
+
+// Removida a necessidade de importar LoadingLink por enquanto
 
 const SignUp = () => {
   return (
@@ -15,15 +17,16 @@ const SignUp = () => {
       <div className="right-panel">
         <div className="login-prompt">
           <p className="login-text">Você já tem uma conta?</p>
-          <LoadingLink to="/login" className="login-button">
+          {/* 2. Usar Link padrão para /login */}
+          <Link to="/login" className="login-button">
             Entre
-          </LoadingLink>
+          </Link>
         </div>
 
         <div className="form-container">
           <div className="logo">
             <img
-              src="/img/Logo.png"
+              src="/img/Logo.png" // Certifique-se que a pasta 'public/img' existe ou ajuste o caminho
               alt="Learn Master Logo"
               className="logo-image"
             />
@@ -34,6 +37,7 @@ const SignUp = () => {
             <br /> Seja LearnMaster.
           </p>
 
+          {/* Botões sociais (ainda sem funcionalidade) */}
           <button className="social-button google-button">
             <FcGoogle size={22} />
             <span className="google-text">Entre com o Google</span>
@@ -48,13 +52,12 @@ const SignUp = () => {
             <span>OU</span>
           </div>
 
-          {/* 2. Substitua o <button> por um <Link>.
-            - O 'to="/register"' aponta para a rota da página que criei.
-            - Mantive a mesma className "email-button" para que o visual não mude.
-          */}
-          <LoadingLink to="/register" className="email-button">
+          {/* 3. Usar Link padrão para /register */}
+          {/* - Mantém a mesma className para o estilo */}
+          <Link to="/register" className="email-button">
             Cadastre-se com Email
-          </LoadingLink>
+          </Link>
+          
         </div>
       </div>
     </div>
