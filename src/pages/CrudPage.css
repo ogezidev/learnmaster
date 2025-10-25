@@ -1,0 +1,271 @@
+/* --- Cores Base (do Figma) --- */
+:root {
+  --cor-azul-sidebar: #0B57CF; /* Azul do LearnMaster */
+  --cor-fundo-main: #f0f2f5;
+  --cor-fundo-tabela: #ffffff;
+  --cor-texto-principal: #333;
+  --cor-texto-secundario: #555;
+  --cor-borda: #e0e0e0;
+  --cor-vermelho: #D93025;
+  --cor-verde: #1E8E3E;
+  --cor-overlay: rgba(0, 0, 0, 0.6);
+}
+
+/* --- Layout Básico --- */
+.crud-container {
+  display: flex;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  background-color: var(--cor-fundo-main);
+}
+
+.crud-sidebar {
+  width: 260px;
+  background-color: var(--cor-azul-sidebar);
+  padding: 24px;
+  color: white;
+}
+.sidebar-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+.sidebar-logo img {
+  width: 32px;
+}
+.sidebar-button {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+}
+.sidebar-button.active {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Conteúdo Principal --- */
+.crud-main-content {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+
+.crud-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--cor-borda);
+  background-color: var(--cor-fundo-tabela);
+}
+.breadcrumb {
+  color: var(--cor-texto-secundario);
+}
+.user-profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.user-avatar {
+  width: 32px;
+  height: 32px;
+  background-color: #ccc;
+  border-radius: 50%;
+}
+
+.content-body {
+  padding: 24px 40px;
+}
+
+.content-body h1 {
+  font-size: 2rem;
+  color: var(--cor-texto-principal);
+  margin-bottom: 24px;
+}
+
+.table-controls {
+  margin-bottom: 20px;
+}
+.search-bar {
+  padding: 10px 16px;
+  font-size: 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  min-width: 300px;
+}
+
+/* --- Tabela (Estilo Figma) --- */
+.table-wrapper {
+  background-color: var(--cor-fundo-tabela);
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  overflow: hidden;
+}
+.users-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.users-table th, .users-table td {
+  padding: 16px 20px;
+  text-align: left;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.users-table th {
+  background-color: #f9f9f9;
+  color: var(--cor-texto-secundario);
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+.users-table tr:last-child td {
+  border-bottom: none;
+}
+.action-button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: var(--cor-texto-secundario);
+}
+.action-button:hover {
+  color: var(--cor-texto-principal);
+}
+
+/* Status (Ativo/Inativo) */
+.status-ativo {
+  color: var(--cor-verde);
+}
+.status-inativo {
+  color: var(--cor-vermelho);
+}
+
+/* --- Modais (Estilo Figma) --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--cor-overlay);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+  padding: 24px;
+}
+
+/* Modal de Ações (Frame 5) */
+.modal-actions-menu {
+  display: flex;
+  gap: 16px;
+  padding: 20px;
+}
+.modal-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  font-size: 1rem;
+  font-weight: 600;
+  border: 2px solid var(--cor-borda);
+  border-radius: 8px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.modal-btn:hover {
+  opacity: 0.8;
+}
+
+.modal-btn.btn-delete {
+  color: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+}
+.modal-btn.btn-edit {
+  color: var(--cor-verde);
+  border-color: var(--cor-verde);
+}
+.modal-btn.btn-status.btn-status-inativo {
+  color: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+}
+.modal-btn.btn-status.btn-status-ativo {
+  color: var(--cor-verde);
+  border-color: var(--cor-verde);
+}
+
+/* Modal de Excluir (Frame 6) */
+.modal-delete-confirm {
+  text-align: center;
+  max-width: 450px;
+  padding: 40px;
+}
+.modal-delete-confirm h2 {
+  color: var(--cor-texto-principal);
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+.modal-delete-confirm p {
+  color: var(--cor-texto-secundario);
+  margin-bottom: 24px;
+}
+.modal-btn.btn-delete-confirm {
+  color: var(--cor-vermelho);
+  border-color: var(--cor-vermelho);
+}
+.modal-btn.btn-delete-confirm:hover {
+  background-color: var(--cor-vermelho);
+  color: white;
+}
+
+/* Modal de Editar (Frame 7) */
+.modal-edit-form {
+  width: 450px;
+}
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--cor-texto-secundario);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 1rem;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  box-sizing: border-box; /* Importante para o padding não quebrar */
+}
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 24px;
+}
+.modal-btn.btn-edit-confirm {
+  color: var(--cor-verde);
+  border-color: var(--cor-verde);
+}
+.modal-btn.btn-edit-confirm:hover {
+  background-color: var(--cor-verde);
+  color: white;
+}

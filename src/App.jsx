@@ -1,18 +1,24 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes, useLocation, Navigate } from 'react-router-dom';
-import { useLoading } from './context/LoadingContext';
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Route,
+  Routes,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
+import { useLoading } from "./context/LoadingContext";
 
 // --- PÁGINAS ---
-import LandingPage from './pages/LandingPage';
-import Cadastro from './pages/Cadastro';
-import RegisterPage from './pages/RegisterPage';
-import LoginPage from './pages/LoginPage';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen';
-import HomePage from './pages/HomePage';
-import CreateFlashcardPage from './pages/CreateFlashcardPage';
-import DeckSelectionPage from './pages/DeckSelectionPage';
+import LandingPage from "./pages/LandingPage";
+import Cadastro from "./pages/Cadastro";
+import RegisterPage from "./pages/RegisterPage";
+import LoginPage from "./pages/LoginPage";
+import LoadingScreen from "./components/LoadingScreen/LoadingScreen";
+import HomePage from "./pages/HomePage";
+import CreateFlashcardPage from "./pages/CreateFlashcardPage";
+import DeckSelectionPage from "./pages/DeckSelectionPage";
 // 1. IMPORTAÇÃO ADICIONADA:
-import VerTodos from './pages/VerTodos'; 
+import VerTodos from "./pages/VerTodos";
 
 // --- COMPONENTES ---
 const RouteChangeHandler = () => {
@@ -26,11 +32,20 @@ const RouteChangeHandler = () => {
   return null;
 };
 
-const PrivateRoute = ({ children }) => {
-  const isAuthenticated = localStorage.getItem('userToken') !== null;
-  return isAuthenticated ? children : <Navigate to="/login" />;
-};
+const PrivateRoute = ({ children, role }) => {
+  const token = localStorage.getItem("userToken");
+  const userRole = localStorage.getItem("userRole");
 
+  if (!token) {
+    return <Navigate to="/login" />;
+  }
+
+  if (role && userRole !== role) {
+    return <Navigate to="/home" />; // ou para uma página "Acesso negado"
+  }
+
+  return children;
+};
 
 function App() {
   const { isLoading } = useLoading();
@@ -49,34 +64,53 @@ function App() {
         {/* --- ROTAS PRIVADAS --- */}
         <Route
           path="/home"
-          element={<PrivateRoute><HomePage /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <HomePage />
+            </PrivateRoute>
+          }
         />
-        
+
         <Route
-          path="/criar-flashcard" 
-          element={<PrivateRoute><CreateFlashcardPage /></PrivateRoute>}
+          path="/criar-flashcard"
+          element={
+            <PrivateRoute>
+              <CreateFlashcardPage />
+            </PrivateRoute>
+          }
         />
 
         <Route
           path="/selecionar-deck"
-          element={<PrivateRoute><DeckSelectionPage /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <DeckSelectionPage />
+            </PrivateRoute>
+          }
         />
 
         {/* 2. ROTA ADICIONADA: Mapeia /vertodos para o componente VerTodos */}
         <Route
           path="/vertodos"
-          element={<PrivateRoute><VerTodos /></PrivateRoute>}
+          element={
+            <PrivateRoute>
+              <VerTodos />
+            </PrivateRoute>
+          }
         />
 
         {/* Rota padrão */}
-        <Route 
-          path="*" 
+        <Route
+          path="*"
           element={
-            localStorage.getItem('userToken') !== null 
-              ? <Navigate to="/home" /> 
-              : <Navigate to="/" />
-          } 
+            localStorage.getItem("userToken") !== null ? (
+              <Navigate to="/home" />
+            ) : (
+              <Navigate to="/" />
+            )
+          }
         />
+      
       </Routes>
     </Router>
   );
